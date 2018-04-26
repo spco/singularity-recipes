@@ -1,0 +1,32 @@
+BootStrap: yum
+OSVersion: 7
+MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/x86_64/
+
+Include: yum
+
+%help
+echo "This is a container to run MILC on CentOS compiled under Intel."
+
+%setup
+mkdir ${SINGULARITY_ROOTFS}/MILC-Intel
+
+%files
+    qla_bench-qla-1.7.1-f3 /MILC-Intel
+    qla_bench-qla-1.7.1-d3 /MILC-Intel
+
+%post
+yum install -y openssh-clients
+chmod -R 777 /MILC-Intel
+exit 0
+
+%runscript
+cd  /MILC-Intel
+ls .
+echo "Shouldnt require sudo to run."
+export OMP_NUM_THREADS=16
+./qla_bench-qla-1.7.1-d3 2>&1 | tee d3.output
+#./qla_bench-qla-1.7.1-f3 2>&1 | tee f3.output
+exit 0
+
+
+
