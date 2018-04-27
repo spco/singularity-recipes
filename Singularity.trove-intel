@@ -20,6 +20,7 @@ Include: yum
   cd /TROVE
   pwd
   ls
+  df -h .
   export OMP_NUM_THREADS=16
   ./run_trove.sh
   ./run_trove_numa.sh
