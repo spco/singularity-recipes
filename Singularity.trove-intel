@@ -21,6 +21,8 @@ Include: yum
   pwd
   ls
   df -h .
+  df -h /TROVE/OUT
+  df -h ./OUT
   export OMP_NUM_THREADS=16
   ./run_trove.sh
   ./run_trove_numa.sh
