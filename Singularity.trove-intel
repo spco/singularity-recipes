@@ -17,7 +17,9 @@ Include: yum
   exit 0
 
 %runscript
-  cd /TROVE
+  cd ${SINGULARITYROOTFS}/TROVE
+  pwd
+  ls
   export OMP_NUM_THREADS=16
   ./run_trove.sh
   ./run_trove_numa.sh
