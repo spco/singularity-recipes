@@ -5,13 +5,13 @@ MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearc
 Include: yum
 
 %help
-  echo "This is a container to run TROVE on CentOS compiled under Intel. This uses a pair of pre-compiled binaries from ALICE2, stored on www1 at Leicester, and requiring SSE4_2, AVX or AVX2 to run each."
+  echo "This is a container to run TROVE on CentOS compiled under Intel. This uses pre-compiled binaries from ALICE2, stored on www1 at Leicester. There is a version of the executable compiled for each of SSE4_2, AVX and AVX2."
 
 %post
   mkdir -p ${SINGULARITY_ROOTFS}/TROVE/
   yum install -y wget tar gzip gunzip
-  wget https://www1.lamp.le.ac.uk/local/www/htdocs/compiled_trove.tar.gz ${SINGULARITYROOTFS}/TROVE/
   cd ${SINGULARITYROTFS}/TROVE
+  wget https://www1.lamp.le.ac.uk/compiled_trove.tar.gz
   tar zxf compiled_trove.tar.gz
   chmod -R 777 ${SINGULARITYROOTFS}/TROVE
   exit 0
