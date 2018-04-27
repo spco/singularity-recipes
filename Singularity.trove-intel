@@ -10,14 +10,14 @@ Include: yum
 %post
   mkdir -p ${SINGULARITY_ROOTFS}/TROVE/
   yum install -y wget tar gzip gunzip
-  cd ${SINGULARITYROOTFS}/TROVE
+  cd ${SINGULARITY_ROOTFS}/TROVE
   wget https://www1.lamp.le.ac.uk/compiled_trove.tar.gz
   tar zxf compiled_trove.tar.gz
-  chmod -R 777 ${SINGULARITYROOTFS}/TROVE
+  chmod -R 777 ${SINGULARITY_ROOTFS}/TROVE
   exit 0
 
 %runscript
-  cd ${SINGULARITYROOTFS}/TROVE
+  cd ${SINGULARITY_ROOTFS}/TROVE
   pwd
   ls
   export OMP_NUM_THREADS=16
