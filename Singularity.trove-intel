@@ -1,0 +1,27 @@
+BootStrap: yum
+OSVersion: 7
+MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+
+Include: yum
+
+%help
+  echo "This is a container to run TROVE on CentOS compiled under Intel. This uses a pair of pre-compiled binaries from ALICE2, stored on www1 at Leicester, and requiring SSE4_2, AVX or AVX2 to run each."
+
+%setup
+  mkdir -p ${SINGULARITY_ROOTFS}/TROVE/
+  yum install wget tar gzip
+  wget https://www1.lamp.le.ac.uk/local/www/htdocs/compiled_trove.tar.gz ${SINGULARITYROOTFS}/TROVE/
+  cd ${SINGULARITYROTFS}/TROVE
+  tar zxf compiled_trove.tar.gz
+  chmod -R 777 ${SINGULARITYROOTFS}/TROVE
+  exit 0
+
+%runscript
+  cd /TROVE
+  export OMP_NUM_THREADS=16
+  ./run_trove.sh
+  ./run_trove_numa.sh
+  exit 0
+
+
+
